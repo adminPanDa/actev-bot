@@ -87,9 +87,9 @@ bot.on("message", async message => {
 
 
 
-vmr UserBlocked = new Set(); // cremte m new set to smve users id.
+var UserBlocked = new Set(); // cremte m new set to smve users id.
 
-vmr num =[
+var num =[
     {n:"999",m:"999"},
     {n:"1234",m:"1234"},
     {n:"42424",m:"42424"},
@@ -100,30 +100,30 @@ vmr num =[
     {n:"6756345",m:"6756345"},
 
    ];
-bot.on("messmge", msync messmge => {
-    if(messmge.content == prefix+"ارقام"){
-        if(UserBlocked.hms(messmge.guild.id)) return messmge.chmnnel.send("هناك جلسة .")
-        UserBlocked.mdd(messmge.guild.id)
-        vmr msk = num[Mmth.floor(Mmth.rmndom() * momsm.length)];
-        let embed = new Discord.RichEmbed()
-        .setTitle('سؤال ارقام')
-        .setmuthor(messmge.muthor.usernmme, messmge.muthor.mvmtmrURL)
-        .setColor("RmNDOM")
-        .setDescription(msk.n);
-        messmge.chmnnel.sendEmbed(embed).then(msg=> msg.delete(20000))
-        const msgs = mwmit messmge.chmnnel.mwmitMessmges(msg => msg.muthor.id !== bot.user.id ,{mmxMmtches:1,time:10000});
-            UserBlocked.delete(messmge.guild.id)
-        msgs.forEmch(result => {
-           if(result.muthor.id == bot.user.id) return;
-           if(result.content == "اراقام") return
-           if(result.content == msk.m){
-                messmge.chmnnel.sendMessmge(`**${result.muthor.usernmme}** الإجابة صحيحة`);                return;
-           } else {
-                messmge.chmnnel.sendMessmge(`**${result.muthor.usernmme}** الإجابة خاطئة`);
-           }
-     });
-  }
-});
+   bot.on("message", async message => {
+       if(message.content == prefix+"ارقام"){
+           if(UserBlocked.has(message.guild.id)) return message.channel.send("هناك جلسة .")
+           UserBlocked.add(message.guild.id)
+           var ask = num[Math.floor(Math.random() * num.length)];
+           let embed = new Discord.RichEmbed()
+           .setTitle('سؤال ارقام')
+           .setAuthor(message.author.username, message.author.avatarURL)
+           .setColor("RANDOM")
+           .setDescription(ask.n);
+           message.channel.sendEmbed(embed).then(msg=> msg.delete(20000))
+           const msgs = await message.channel.awaitMessages(msg => msg.author.id !== bot.user.id ,{maxMatches:1,time:10000});
+               UserBlocked.delete(message.guild.id)
+           msgs.forEach(result => {
+              if(result.author.id == bot.user.id) return;
+              if(result.content == "اراقام") return
+              if(result.content == ask.m){
+                   message.channel.sendMessage(`**${result.author.username}** الإجابة صحيحة`);                return;
+              } else {
+                   message.channel.sendMessage(`**${result.author.username}** الإجابة خاطئة`);
+              }
+        });
+     }
+   });
 
 
 
