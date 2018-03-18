@@ -15,8 +15,6 @@ if(message.content == prefix+"لعب"){
 
         var ask = aoasm[Math.floor(Math.random() * aoasm.length)];
 
-if(ask.Users != null){ask.Users = message.author.id;} else {return message.channel.send("اعد المحاولة ...")}
-
         message.channel.send(ask.q).then(msg=> msg.delete(20000))
 
         const msgs = await message.channel.awaitMessages(msg => {
