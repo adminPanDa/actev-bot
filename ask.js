@@ -1,4 +1,7 @@
 const Discord = require("discord.js");
+const bot = new Discord.Client();
+const fs = require("fs");
+const prefix= '#';
 var UserBlocked = new Set(), // create a new set to save users id.
     Users = [];
 
@@ -6,7 +9,7 @@ var aoasm =[{q:"ما عاصمة **افغانستان**",a:"1",Users:null},{q:"م
 
 bot.on("message", async message => {
 
-if(message.content == prefix+"عاصمة"){
+if(message.content == prefix+"لعب"){
 
 if(UserBlocked.has(message.author.id)) return message.channel.send("هناك جلسة .")
 
