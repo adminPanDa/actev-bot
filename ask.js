@@ -1,3 +1,4 @@
+const Discord = require("discord.js");
 var UserBlocked = new Set(), // create a new set to save users id.
     Users = [];
 
