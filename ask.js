@@ -87,6 +87,44 @@ bot.on("message", async message => {
 
 
 
+var UserBlocked = new Set(); // create a new set to save users id.
+
+var num =[
+    {q:"999",a:"999"},
+    {q:"1234",a:"1234"},
+    {q:"42424",a:"42424"},
+    {q:"903342",a:"903342"},
+    {q:"60392",a:"60392"},
+    {q:"3234436",a:"3234436"},
+    {q:"87654",a:"87654"},
+    {q:"6756345",a:"6756345"},
+
+   ];
+bot.on("message", async message => {
+    if(message.content == prefix+"ارقام"){
+        if(UserBlocked.has(message.guild.id)) return message.channel.send("هناك جلسة .")
+        UserBlocked.add(message.guild.id)
+        var ask = num[Math.floor(Math.random() * aoasm.length)];
+        let embed = new Discord.RichEmbed()
+        .setTitle('سؤال ارقام')
+        .setAuthor(message.author.username, message.author.avatarURL)
+        .setColor("RANDOM")
+        .setDescription(ask.q);
+        message.channel.sendEmbed(embed).then(msg=> msg.delete(20000))
+        const msgs = await message.channel.awaitMessages(msg => msg.author.id !== bot.user.id ,{maxMatches:1,time:10000});
+            UserBlocked.delete(message.guild.id)
+        msgs.forEach(result => {
+           if(result.author.id == bot.user.id) return;
+           if(result.content == "اراقام") return
+           if(result.content == ask.a){
+                message.channel.sendMessage(`**${result.author.username}** الإجابة صحيحة`);                return;
+           } else {
+                message.channel.sendMessage(`**${result.author.username}** الإجابة خاطئة`);
+           }
+     });
+  }
+});
+
 
 
 
