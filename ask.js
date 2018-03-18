@@ -19,8 +19,6 @@ if(message.content == prefix+"لعب"){
 
         const msgs = await message.channel.awaitMessages(msg => {
 
-if(ask.Users != msg.author.id) return message.channel.send("ذا السؤال و لك يا ملقوف ...")
-
 if(msg.content.includes(ask.a)){
 
         message.channel.send("لقد ربحت ...");
