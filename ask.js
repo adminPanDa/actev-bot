@@ -2,41 +2,79 @@ const Discord = require("discord.js");
 const bot = new Discord.Client();
 const fs = require("fs");
 const prefix= '#';
-var UserBlocked = new Set(), // create a new set to save users id.
-    Users = [];
+var UserBlocked = new Set(); // create a new set to save users id.
 
-var aoasm =[{q:"ما عاصمة **افغانستان**",a:"1",Users:null},{q:"من عمك؟",a:"انت",Users:null},{q:"من هو PO?",a:"PO",Users:null}];
-
+var aoasm =[
+    {q:"ما عاصمة **افغانستان**",a:""},
+    {q:"ما عاصمة ** البانيا**",a:"كابول"},
+    {q:"ما عاصمة **الجزائر **",a:"تيرانا"},
+    {q:"ما عاصمة ** **",a:"الجزائر"},
+    {q:"ما عاصمة **اندورا لا فيلا **",a:"اندورا"},
+    {q:"ما عاصمة **انجولا**",a:"لواندا"},
+    {q:"ما عاصمة **انتيجوا وباربودا**",a:"سان جونز"},
+    {q:"ما عاصمة **الارجنتين**",a:"بوينس ايرس"},
+    {q:"ما عاصمة **ارمينيا**",a:""},
+    {q:"ما عاصمة ** **",a:"يريفان"},
+    {q:"ما عاصمة ** استراليا**",a:"كانبرا"},
+    {q:"ما عاصمة **النمسا**",a:"فيينا"},
+    {q:"ما عاصمة ** اذربيجان**",a:"باكو"},
+    {q:"ما عاصمة **جزر البهاما**",a:"ناساو"},
+    {q:"ما عاصمة **البحرين**",a:"المنامة"},
+    {q:"ما عاصمة ** بنجلاديش**",a:"دكـا"},
+    {q:"ما عاصمة **باربادوس **",a:"بريدجتاون"},
+    {q:"ما عاصمة **بيلا روسيا**",a:"مينسك"},
+    {q:"ما عاصمة ** بلجيكا**",a:"بروكسل"},
+    {q:"ما عاصمة ** بيليز**",a:"بلوم بان"},
+    {q:"ما عاصمة ** بنين**",a:"بورتو نوفو"},
+    {q:"ما عاصمة ** بوتان**",a:"ثيمفو"},
+    {q:"ما عاصمة **بوليفيا **",a:"لاباز"},
+    {q:"ما عاصمة ** البوسنة والهرسك**",a:"سراييفو"},
+    {q:"ما عاصمة ** بوتسوانا**",a:"جابورون"},
+    {q:"ما عاصمة ** البرازيل**",a:"برازيليا"},
+    {q:"ما عاصمة ** بروناى**",a:"بندر سرى بيجاوان"},
+    {q:"ما عاصمة ** بلغاريا**",a:"صوفيا"},
+    {q:"ما عاصمة ** بوركينا فاسو**",a:"واجادوجو"},
+    {q:"ما عاصمة **بوروندى **",a:"بوجومبورا"},
+    {q:"ما عاصمة **كمبوديا **",a:"بنوم بنـه"},
+    {q:"ما عاصمة ** الكاميرون**",a:"ياوندى"},
+    {q:"ما عاصمة ** كندا**",a:"اوتاوا"},
+    {q:"ما عاصمة ** الرأس الاخضر**",a:"برايا"},
+    {q:"ما عاصمة **تشاد **",a:"نجامينا"},
+    {q:"ما عاصمة ** شيلى**",a:"سانتياجو"},
+    {q:"ما عاصمة **الصين **",a:"بكين"},
+    {q:"ما عاصمة **جزر الُقمـــر **",a:""},
+    {q:"ما عاصمة ** **",a:"مورونى"},
+    {q:"ما عاصمة **كوستاريكا **",a:"سان خوسيه"},
+    {q:"ما عاصمة ** كوت ديفوار**",a:"ابيدجان"},
+    {q:"ما عاصمة **كرواتيا **",a:"زغرب"},
+    {q:"ما عاصمة ** كوبا**",a:"هافانا"},
+    {q:"ما عاصمة ** قبرص**",a:" "},
+    {q:"ما عاصمة ** جمهورية التشيك**",a:"براغ"},
+    {q:"ما عاصمة **الدنمارك **",a:"كوبنهاجن"},
+    {q:"ما عاصمة ** جيبوتى**",a:"جيبوتى"},
+    {q:"ما عاصمة ** دومينيكا**",a:"روسيو"},
+    {q:"ما عاصمة **الدومينيكان **",a:"سان دومينجو"},
+    {q:"ما عاصمة **تيمور الشرقية **",a:"ديلى"},
+   ];
 bot.on("message", async message => {
-
-if(message.content == prefix+"لعب"){
-
-        UserBlocked.add(message.author.id)
-
+    if(message.content == prefix+"عاصمة"){
+        if(UserBlocked.has(message.guild.id)) return message.channel.send("هناك جلسة .")
+        UserBlocked.add(message.guild.id)
         var ask = aoasm[Math.floor(Math.random() * aoasm.length)];
-
         message.channel.send(ask.q).then(msg=> msg.delete(20000))
-
-        const msgs = await message.channel.awaitMessages(msg => {
-
-if(msg.content.includes(ask.a)){
-
-        message.channel.send("لقد ربحت ...");
-
-      } else {
-
-        message.channel.send("لقد خسرت ...");
-
-      }
-
-        } ,{maxMatches:1,time:10000});
-
-      UserBlocked.delete(message.author.id)
-
-}
+        const msgs = await message.channel.awaitMessages(msg => msg.author.id !== bot.user.id ,{maxMatches:1,time:10000});
+            UserBlocked.delete(message.guild.id)
+        msgs.forEach(result => {
+           if(result.author.id == bot.user.id) return;
+           if(result.content == "عاصمة") return
+           if(result.content == ask.a){
+                message.channel.sendMessage(`**${result.author.username}** الإجابة صحيحة`);                return;
+           } else {
+                message.channel.sendMessage(`**${result.author.username}** الإجابة خاطئة`);
+           }
+     });
+  }
 });
-
-//end the game
 
 bot.login(process.env.BOT_TOKEN);
 
