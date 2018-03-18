@@ -66,7 +66,7 @@ bot.on("message", async message => {
         .setAuthor(message.author.username, message.author.avatarURL)
         .setColor("RANDOM")
         .setDescription(ask.q);
-        message.channel.send(embed).then(msg=> msg.delete(20000))
+        message.channel.sendEmbed(embed).then(msg=> msg.delete(20000))
         const msgs = await message.channel.awaitMessages(msg => msg.author.id !== bot.user.id ,{maxMatches:1,time:10000});
             UserBlocked.delete(message.guild.id)
         msgs.forEach(result => {
