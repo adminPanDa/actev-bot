@@ -1,46 +1,44 @@
-const Discord = require('discord.js');
-const client = new Discord.Client();
-const prefix = "#" ;
-const fs = require('fs');
+var UserBlocked = new Set(), // create a new set to save users id.
+    Users = [];
 
+var aoasm =[{q:"ما عاصمة **افغانستان**",a:"1",Users:null},{q:"من عمك؟",a:"انت",Users:null},{q:"من هو PO?",a:"PO",Users:null}];
 
-const ask = Object.values(JSON.parse(fs.readFileSync("./ask.json", "utf8")));
+bot.on("message", async message => {
 
-var chatListen;
-client.on('message', message => {
-  if (message.author.id === client.user.id) return
-   const bbb = ask[Math.floor(Math.random() * ask.length)];
-   const bb1 = bbb
-    const input = message.content;
-    if (input.toLowerCase().split(' ')[0] == prefix + "لعب"){
-  message.channel.send({embed: {
-    title: "لعب",
-    description: bb1.swal,
-       "thumbnail": {
-    "url": message.author.displayAvatarURL
-  },
-      "footer": {
-        "text": "DARK KNIGHT ⚘"
-      },
-  }}).then(() => {
-        chatListen = true;
-      })
-    }Math.round(Math.random() * 5000);
-  const word = bb1.jwab
-var isCorrect
-ask.forEach(bb1 => {
-  if (message.content === bb1.jwab) {
-var embed = new Discord.RichEmbed()
-.setTitle("إجابة صحيحه")
-.setFooter(message.author.tag)
-.setColor("RANDOM")
-message.channel.send(embed)
-    return isCorrect = true
-  } else {
-    isCorrect = false
-  }
-})
+if(message.content == prefix+"عاصمة"){
+
+if(UserBlocked.has(message.author.id)) return message.channel.send("هناك جلسة .")
+
+        UserBlocked.add(message.author.id)
+
+        var ask = aoasm[Math.floor(Math.random() * aoasm.length)];
+
+if(ask.Users != null){ask.Users = message.author.id;} else {return message.channel.send("اعد المحاولة ...")}
+
+        message.channel.send(ask.q).then(msg=> msg.delete(20000))
+
+        const msgs = await message.channel.awaitMessages(msg => {
+
+if(ask.Users != msg.author.id) return message.channel.send("ذا السؤال و لك يا ملقوف ...")
+
+if(msg.content.includes(ask.a)){
+
+        message.channel.send("لقد ربحت ...");
+
+      } else {
+
+        message.channel.send("لقد خسرت ...");
+
+      }
+
+        } ,{maxMatches:1,time:10000});
+
+      UserBlocked.delete(message.author.id)
+
+}
 });
+
+//end the game
 
 client.login(process.env.BOT_TOKEN);
 
