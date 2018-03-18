@@ -11,8 +11,6 @@ bot.on("message", async message => {
 
 if(message.content == prefix+"لعب"){
 
-if(UserBlocked.has(message.author.id)) return message.channel.send("هناك جلسة .")
-
         UserBlocked.add(message.author.id)
 
         var ask = aoasm[Math.floor(Math.random() * aoasm.length)];
