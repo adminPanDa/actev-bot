@@ -61,7 +61,12 @@ bot.on("message", async message => {
         if(UserBlocked.has(message.guild.id)) return message.channel.send("هناك جلسة .")
         UserBlocked.add(message.guild.id)
         var ask = aoasm[Math.floor(Math.random() * aoasm.length)];
-        message.channel.send(ask.q).then(msg=> msg.delete(20000))
+        let embed = new Discord.RichEmbed()
+        .setTitle('سؤال عواصم')
+        .setAuthor(message.author.username, message.author.avatarURL)
+        .setColor("RANDOM")
+        .setDescription(ask.q);
+        message.channel.send(embed).then(msg=> msg.delete(20000))
         const msgs = await message.channel.awaitMessages(msg => msg.author.id !== bot.user.id ,{maxMatches:1,time:10000});
             UserBlocked.delete(message.guild.id)
         msgs.forEach(result => {
