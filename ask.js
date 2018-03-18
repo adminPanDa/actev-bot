@@ -73,11 +73,7 @@ bot.on("message", async message => {
            if(result.author.id == bot.user.id) return;
            if(result.content == "عاصمة") return
            if(result.content == ask.a){
-             var embedx = new Discord.RichEmbed()
-             .setTitle(':x:خطاء')
-             .setAuthor(message.author.username, message.author.avatarURL)
-             .setColor("RANDOM")
-             .setDescription(`**${result.author.username}** الإجابة خاطئة`);
+             
              let embeds = new Discord.RichEmbed()
              .setTitle(':white_check_mark: اجابة صحيحة')
              .setAuthor(message.author.username, message.author.avatarURL)
@@ -85,7 +81,12 @@ bot.on("message", async message => {
              .setDescription(`**${result.author.username}** الإجابة صحيحة`);
                 message.channel.sendEmbed(embeds);                return;
            } else {
-               
+                                 
+                                  var embedx = new Discord.RichEmbed()
+                .setTitle(':x:خطاء')
+                .setAuthor(message.author.username, message.author.avatarURL)
+                .setColor("RANDOM")
+                .setDescription(`**${result.author.username}** الإجابة خاطئة`);
                 message.channel.sendEmbed(embedx);
            }
      });
@@ -128,11 +129,7 @@ var num =[
               if(result.author.id == bot.user.id) return;
               if(result.content == "اراقام") return
               if(result.content == ask.m){
-                var embedx = new Discord.RichEmbed()
-                .setTitle(':x:خطاء')
-                .setAuthor(message.author.username, message.author.avatarURL)
-                .setColor("RANDOM")
-                .setDescription(`**${result.author.username}** الإجابة خاطئة`);
+                
                 let embeds = new Discord.RichEmbed()
                 .setTitle(':white_check_mark: اجابة صحيحة')
                 .setAuthor(message.author.username, message.author.avatarURL)
@@ -140,6 +137,12 @@ var num =[
                 .setDescription(`**${result.author.username}** الإجابة صحيحة`);
                    message.channel.sendEmbed(embeds);                return;
               } else {
+                                    
+                                  var embedx = new Discord.RichEmbed()
+                .setTitle(':x:خطاء')
+                .setAuthor(message.author.username, message.author.avatarURL)
+                .setColor("RANDOM")
+                .setDescription(`**${result.author.username}** الإجابة خاطئة`);
                    message.channel.sendEmbed(embedx);
               }
         });
@@ -185,11 +188,7 @@ var fkk =[
               if(result.author.id == bot.user.id) return;
               if(result.content == "فكك") return
               if(result.content == ask.k){
-                var embedx = new Discord.RichEmbed()
-                .setTitle(':x:خطاء')
-                .setAuthor(message.author.username, message.author.avatarURL)
-                .setColor("RANDOM")
-                .setDescription(`**${result.author.username}** الإجابة خاطئة`);
+
                 let embeds = new Discord.RichEmbed()
                 .setTitle(':white_check_mark: اجابة صحيحة')
                 .setAuthor(message.author.username, message.author.avatarURL)
@@ -197,6 +196,13 @@ var fkk =[
                 .setDescription(`**${result.author.username}** الإجابة صحيحة`);
                    message.channel.sendEmbed(embeds);                return;
               } else {
+                  
+                                  var embedx = new Discord.RichEmbed()
+                .setTitle(':x:خطاء')
+                .setAuthor(message.author.username, message.author.avatarURL)
+                .setColor("RANDOM")
+                .setDescription(`**${result.author.username}** الإجابة خاطئة`);
+                  
                    message.channel.sendEmbed(embedx);
               }
         });
