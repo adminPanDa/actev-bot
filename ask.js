@@ -73,7 +73,7 @@ bot.on("message", async message => {
            if(result.author.id == bot.user.id) return;
            if(result.content == "عاصمة") return
            if(result.content == ask.a){
-             
+
              let embeds = new Discord.RichEmbed()
              .setTitle(':white_check_mark: اجابة صحيحة')
              .setAuthor(message.author.username, message.author.avatarURL)
@@ -81,7 +81,7 @@ bot.on("message", async message => {
              .setDescription(`**${result.author.username}** الإجابة صحيحة`);
                 message.channel.sendEmbed(embeds);                return;
            } else {
-                                 
+
                                   var embedx = new Discord.RichEmbed()
                 .setTitle(':x:خطاء')
                 .setAuthor(message.author.username, message.author.avatarURL)
@@ -129,7 +129,7 @@ var num =[
               if(result.author.id == bot.user.id) return;
               if(result.content == "اراقام") return
               if(result.content == ask.m){
-                
+
                 let embeds = new Discord.RichEmbed()
                 .setTitle(':white_check_mark: اجابة صحيحة')
                 .setAuthor(message.author.username, message.author.avatarURL)
@@ -137,7 +137,7 @@ var num =[
                 .setDescription(`**${result.author.username}** الإجابة صحيحة`);
                    message.channel.sendEmbed(embeds);                return;
               } else {
-                                    
+
                                   var embedx = new Discord.RichEmbed()
                 .setTitle(':x:خطاء')
                 .setAuthor(message.author.username, message.author.avatarURL)
@@ -181,8 +181,8 @@ var fkk =[
            .setAuthor(message.author.username, message.author.avatarURL)
            .setColor("RANDOM")
            .setDescription(ask.f);
-           message.channel.sendEmbed(embed).then(msg=> msg.delete(20000))
-           const msgs = await message.channel.awaitMessages(msg => msg.author.id !== bot.user.id ,{maxMatches:1,time:10000});
+           message.channel.sendEmbed(embed).then(msg=> msg.delete(200000))
+           const msgs = await message.channel.awaitMessages(msg => msg.author.id !== bot.user.id ,{maxMatches:1,time:100000});
                UserBlocked.delete(message.guild.id)
            msgs.forEach(result => {
               if(result.author.id == bot.user.id) return;
@@ -196,13 +196,13 @@ var fkk =[
                 .setDescription(`**${result.author.username}** الإجابة صحيحة`);
                    message.channel.sendEmbed(embeds);                return;
               } else {
-                  
+
                                   var embedx = new Discord.RichEmbed()
                 .setTitle(':x:خطاء')
                 .setAuthor(message.author.username, message.author.avatarURL)
                 .setColor("RANDOM")
                 .setDescription(`**${result.author.username}** الإجابة خاطئة`);
-                  
+
                    message.channel.sendEmbed(embedx);
               }
         });
