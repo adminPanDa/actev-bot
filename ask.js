@@ -44,7 +44,7 @@ if(msg.content.includes(ask.a)){
 
 //end the game
 
-client.login(process.env.BOT_TOKEN);
+bot.login(process.env.BOT_TOKEN);
 
 
 
