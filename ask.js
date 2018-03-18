@@ -73,7 +73,7 @@ bot.on("message", async message => {
            if(result.author.id == bot.user.id) return;
            if(result.content == "عاصمة") return
            if(result.content == ask.a){
-             let embedx = new Discord.RichEmbed()
+             var embedx = new Discord.RichEmbed()
              .setTitle(':x:خطاء')
              .setAuthor(message.author.username, message.author.avatarURL)
              .setColor("RANDOM")
@@ -85,8 +85,9 @@ bot.on("message", async message => {
              .setDescription(`**${result.author.username}** الإجابة صحيحة`);
                 message.channel.sendEmbed(embeds);                return;
            } else {
+               
                 message.channel.sendEmbed(embedx);
-           }}
+           }
      });
   }
 });
@@ -127,7 +128,7 @@ var num =[
               if(result.author.id == bot.user.id) return;
               if(result.content == "اراقام") return
               if(result.content == ask.m){
-                let embedx = new Discord.RichEmbed()
+                var embedx = new Discord.RichEmbed()
                 .setTitle(':x:خطاء')
                 .setAuthor(message.author.username, message.author.avatarURL)
                 .setColor("RANDOM")
@@ -184,7 +185,7 @@ var fkk =[
               if(result.author.id == bot.user.id) return;
               if(result.content == "فكك") return
               if(result.content == ask.k){
-                let embedx = new Discord.RichEmbed()
+                var embedx = new Discord.RichEmbed()
                 .setTitle(':x:خطاء')
                 .setAuthor(message.author.username, message.author.avatarURL)
                 .setColor("RANDOM")
